@@ -1,18 +1,12 @@
 name: nephro_guard_bd
 description: A Material 3 Flutter application for predicting diabetic nephropathy risk with a microalbuminuria focus, designed for rural Bangladesh clinics.
 publish_to: 'none'
+
 version: 1.0.0+1
 
-
 environment:
-  sdk: ^3.8.0-171.0.dev
+  sdk: "3.8.0-171.0.dev"
 
-# Dependencies specify other packages that your package needs in order to work.
-# To automatically upgrade your package dependencies to the latest versions
-# consider running `flutter pub upgrade --major-versions`. Alternatively,
-# dependencies can be manually updated by changing the version numbers below to
-# the latest version available on pub.dev. To see which dependencies have newer
-# versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
     sdk: flutter
@@ -39,3 +33,12 @@ dependencies:
 
   # Date Formatting
   intl: ^0.20.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
