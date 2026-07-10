@@ -5,7 +5,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: "3.8.0-171.0.dev"
+  sdk: ">=3.7.2 <4.0.0"
 
 dependencies:
   flutter:
@@ -13,32 +13,22 @@ dependencies:
 
   cupertino_icons: ^1.0.8
 
-  # State Management
   provider: ^6.1.5
-
-  # Navigation
   go_router: ^16.0.0
-
-  # Responsive UI
   flutter_screenutil: ^5.9.3
-
-  # Fonts
   google_fonts: ^6.3.1
-
-  # SVG Icons
   flutter_svg: ^2.2.0
-
-  # Progress Indicator
   percent_indicator: ^4.2.5
-
-  # Date Formatting
   intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^6.0.0
+  flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/
