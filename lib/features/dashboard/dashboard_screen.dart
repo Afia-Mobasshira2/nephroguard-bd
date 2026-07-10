@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nephro_guard_bd/core/theme/app_colors.dart';
 
 
@@ -182,7 +183,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   child: _ActionCard(
                     title: "New Prediction",
                     icon: Icons.add_chart,
-                    onTap: () {},
+                    onTap: () {
+                    context.go('/patient');
+                    },
                   ),
                 ),
 

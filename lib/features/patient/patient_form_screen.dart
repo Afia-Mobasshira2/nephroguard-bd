@@ -101,7 +101,7 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
 
   void predictRisk() {
     if (_formKey.currentState!.validate()) {
-      context.go('/result');
+      context.go('/prediction');
     }
   }
 
