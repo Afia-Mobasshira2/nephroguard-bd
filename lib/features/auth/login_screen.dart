@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nephro_guard_bd/core/theme/app_colors.dart';
 
-import '../../core/theme/app_colors.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -25,9 +26,18 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _login() {
-    // Temporary login
-    context.go('/dashboard');
+  if (_emailController.text.isEmpty ||
+      _passwordController.text.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Please enter your email and password."),
+      ),
+    );
+    return;
   }
+
+  context.go('/dashboard');
+}
 
   @override
   Widget build(BuildContext context) {
