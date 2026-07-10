@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class HistoryScreen extends StatelessWidget {
+  const HistoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Login"),
+        title: const Text("History"),
       ),
       body: const Center(
         child: Text(
-          "Login Screen",
+          "History Screen",
           style: TextStyle(fontSize: 24),
         ),
       ),

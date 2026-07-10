@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class PatientFormScreen extends StatelessWidget {
+  const PatientFormScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Login"),
+        title: const Text("Patient Form"),
       ),
       body: const Center(
         child: Text(
-          "Login Screen",
+          "Patient Form Screen",
           style: TextStyle(fontSize: 24),
         ),
       ),
