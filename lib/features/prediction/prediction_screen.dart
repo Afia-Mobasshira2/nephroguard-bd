@@ -10,6 +10,26 @@ class PredictionScreen extends StatelessWidget {
     required this.result,
   });
 
+
+  Widget buildInfo(String title, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(title),
+          Text(
+            value,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -43,59 +63,41 @@ class PredictionScreen extends StatelessWidget {
             // Patient Summary
             
             Card(
-              elevation: 3,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(18),
-                child: Column(
-                  children: [
+  elevation: 3,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(20),
+  ),
+  child: Padding(
+    padding: const EdgeInsets.all(18),
+    child: Column(
+      children: [
 
-                    ListTile(
-                      leading: CircleAvatar(
-                        child: Icon(Icons.person),
-                      ),
-                      title: Text(
-                        "Patient #1025",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text("Prediction Report"),
-                    ),
-
-                    Divider(),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Age"),
-                        Text("54 Years"),
-                      ],
-                    ),
-
-                    SizedBox(height: 8),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Gender"),
-                        Text("Male"),
-                      ],
-                    ),
-
-                    SizedBox(height: 8),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("HbA1c"),
-                        Text("8.6%"),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+        const ListTile(
+          leading: CircleAvatar(
+            child: Icon(Icons.person),
+          ),
+          title: Text(
+            "Patient Information",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
             ),
+          ),
+          subtitle: Text("Submitted Clinical Data"),
+        ),
+
+        const Divider(),
+
+        buildInfo("Age", "${result["age"]} Years"),
+        buildInfo("Gender", result["gender"]),
+        buildInfo("Blood Sugar", "${result["bloodSugar"]} mg/dL"),
+        buildInfo("Blood Pressure", "${result["bloodPressure"]} mmHg"),
+        buildInfo("HbA1c", "${result["hba1c"]}%"),
+        buildInfo("Creatinine", result["creatininine"]),
+
+      ],
+    ),
+  ),
+),
 
             const SizedBox(height: 30),
 
@@ -159,7 +161,65 @@ class PredictionScreen extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
+
+Card(
+  color: prediction == "CKD"
+      ? Colors.red.shade50
+      : Colors.green.shade50,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(20),
+  ),
+  child: Padding(
+    padding: const EdgeInsets.all(20),
+    child: Column(
+      children: [
+
+        Icon(
+          prediction == "CKD"
+              ? Icons.warning_amber_rounded
+              : Icons.check_circle,
+          size: 60,
+          color: prediction == "CKD"
+              ? Colors.red
+              : Colors.green,
+        ),
+
+        const SizedBox(height: 15),
+
+        Text(
+          prediction,
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: prediction == "CKD"
+                ? Colors.red
+                : Colors.green,
+          ),
+        ),
+
+        const SizedBox(height: 8),
+
+        Text(
+          "Model Confidence",
+          style: TextStyle(
+            color: Colors.grey.shade700,
+          ),
+        ),
+
+        Text(
+          "${probability.toStringAsFixed(2)}%",
+          style: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    ),
+  ),
+),
+
+const SizedBox(height: 30),
 
             
             // AI Recommendation
@@ -193,27 +253,25 @@ class PredictionScreen extends StatelessWidget {
 
                     const SizedBox(height: 20),
 
-                   Text(
-                    prediction == "CKD"
-                        ? "• Consult a nephrologist."
-                        : "• Continue regular health checkups.",
-                      ),
-
-                    const SizedBox(height: 10),
-
-                    const Text("• Repeat ACR test within 3 months."),
-
-                    const SizedBox(height: 10),
-
-                    const Text("• Improve blood sugar control."),
-
-                    const SizedBox(height: 10),
-
-                    const Text("• Monitor blood pressure regularly."),
-
-                    const SizedBox(height: 10),
-
-                    const Text("• Follow diabetic kidney disease guidelines."),
+                      if (prediction == "CKD") ...[
+                      const Text("• Consult a nephrologist immediately."),
+                      SizedBox(height: 10),
+                      const Text("• Monitor kidney function regularly."),
+                      SizedBox(height: 10),
+                      const Text("• Improve blood sugar control."),
+                      SizedBox(height: 10),
+                      const Text("• Follow prescribed medication."),
+                      SizedBox(height: 10),
+                      const Text("• Reduce salt intake."),
+                    ] else ...[
+                      const Text("• Continue routine diabetes monitoring."),
+                      SizedBox(height: 10),
+                      const Text("• Maintain healthy blood sugar."),
+                      SizedBox(height: 10),
+                      const Text("• Check kidney function yearly."),
+                      SizedBox(height: 10),
+                      const Text("• Continue healthy lifestyle."),
+                    ],
                   ],
                 ),
               ),

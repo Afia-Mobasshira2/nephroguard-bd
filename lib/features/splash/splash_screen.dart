@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 10),
+     duration: const Duration(milliseconds: 900),
     );
 
     _fadeAnimation = CurvedAnimation(
@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.forward();
 
-    Timer(const Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 2), () {
       if (mounted) {
         context.go('/login');
       }
@@ -66,10 +66,9 @@ class _SplashScreenState extends State<SplashScreen>
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color.fromARGB(255, 144, 165, 189),
-              Color.fromARGB(255, 190, 220, 247),
-              Color.fromARGB(255, 139, 179, 175),
-            ],
+          Color(0xFFF8FAFC),
+          Color(0xFFE2E8F0),
+              ],
           ),
         ),
         child: SafeArea(
@@ -85,20 +84,24 @@ class _SplashScreenState extends State<SplashScreen>
                     children: [
 
                       Container(
-                        width: 140,
-                        height: 140,
-                        padding: const EdgeInsets.all(20),
+                        width: 100,
+                        height: 100,
+                        padding: const EdgeInsets.all(14),
                         decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(32),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(.15),
-                              blurRadius: 25,
-                              offset: const Offset(0, 12),
-                            ),
-                          ],
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(24),
+                        border: Border.all(
+                          color: const Color(0xFFE5E7EB),
+                          width: 1.5,
                         ),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 15,
+                            offset: Offset(0, 6),
+                          ),
+                        ],
+                      ),
                         child: Image.asset(
                           "assets/images/logo.png",
                           fit: BoxFit.contain,
@@ -110,7 +113,7 @@ class _SplashScreenState extends State<SplashScreen>
                       const Text(
                         "NephroGuard BD",
                         style: TextStyle(
-                          color: Colors.white,
+                          color:  Color(0xFF0F766E),
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 1,
@@ -123,7 +126,7 @@ class _SplashScreenState extends State<SplashScreen>
                         "Federated Learning-Based\nDiabetic Nephropathy Prediction",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.white70,
+                          color: Colors.black87,
                           fontSize: 16,
                           height: 1.5,
                         ),
@@ -135,7 +138,7 @@ class _SplashScreenState extends State<SplashScreen>
                         "Microalbuminuria Focus for Rural Bangladesh Clinics",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.white60,
+                          color: Colors.black54,
                           fontSize: 14,
                         ),
                       ),
@@ -147,7 +150,7 @@ class _SplashScreenState extends State<SplashScreen>
                         height: 34,
                         child: CircularProgressIndicator(
                           strokeWidth: 3,
-                          color: Colors.white,
+                          color: Color(0xFF0F766E),
                         ),
                       ),
 
@@ -156,7 +159,7 @@ class _SplashScreenState extends State<SplashScreen>
                       const Text(
                         "Loading...",
                         style: TextStyle(
-                          color: Colors.white70,
+                          color: Colors.black54,
                           fontSize: 15,
                         ),
                       ),

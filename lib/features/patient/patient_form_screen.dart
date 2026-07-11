@@ -124,9 +124,21 @@ Future<void> predictRisk() async {
     if (!mounted) return;
 
     context.push(
-      "/prediction",
-      extra: result,
-    );
+        "/prediction",
+        extra: {
+          "prediction": result["prediction"],
+          "probability": result["probability"],
+
+          "age": ageController.text,
+          "gender": gender,
+          "bloodSugar": sugarController.text,
+          "bloodPressure": bpController.text,
+          "creatininine": creatinineController.text,
+          "hba1c": hba1cController.text,
+        },
+      );
+
+
   } catch (e) {
     if (!mounted) return;
 
