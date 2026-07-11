@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nephro_guard_bd/services/api_service.dart';
 
 class PatientFormScreen extends StatefulWidget {
   const PatientFormScreen({super.key});
@@ -99,11 +100,54 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
     );
   }
 
-  void predictRisk() {
-    if (_formKey.currentState!.validate()) {
-      context.go('/prediction');
-    }
+  
+
+
+
+
+
+
+Future<void> predictRisk() async {
+  if (!_formKey.currentState!.validate()) return;
+
+  try {
+    final api = ApiService();
+
+    final result = await api.predict(
+      age: int.parse(ageController.text),
+      bloodPressure: double.parse(bpController.text),
+      bloodSugar: double.parse(sugarController.text),
+      serumCreatinine: double.parse(creatinineController.text),
+      hypertension: hypertension == "Yes",
+    );
+
+    if (!mounted) return;
+
+    context.push(
+      "/prediction",
+      extra: result,
+    );
+  } catch (e) {
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Prediction Failed\n$e"),
+      ),
+    );
   }
+}
+
+
+
+
+
+
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
