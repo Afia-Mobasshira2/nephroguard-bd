@@ -3,13 +3,31 @@ import 'package:go_router/go_router.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class PredictionScreen extends StatelessWidget {
-  const PredictionScreen({super.key});
+  final Map<String, dynamic> result;
+
+  const PredictionScreen({
+    super.key,
+    required this.result,
+  });
 
   @override
   Widget build(BuildContext context) {
-    // Dummy prediction (replace with ML result later)
-    const double risk = 0.87;
-    const String riskLevel = "High Risk";
+
+
+
+
+    final String prediction = result["prediction"];
+
+    final double probability =
+    (result["probability"] as num).toDouble();
+
+    final double risk = probability / 100;
+
+    final String riskLevel =
+    prediction == "CKD" ? "High Risk" : "Low Risk";
+
+
+
 
     return Scaffold(
       appBar: AppBar(
@@ -91,14 +109,17 @@ class PredictionScreen extends StatelessWidget {
               animationDuration: 1500,
               percent: risk,
               circularStrokeCap: CircularStrokeCap.round,
-              progressColor: Colors.red,
+              progressColor:
+              prediction == "CKD"
+                  ? Colors.red
+                  : Colors.green,
               backgroundColor: Colors.grey.shade300,
               center: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children:  [
 
                   Text(
-                    "87%",
+                  "${probability.toStringAsFixed(0)}%",
                     style: TextStyle(
                       fontSize: 34,
                       fontWeight: FontWeight.bold,
@@ -115,15 +136,24 @@ class PredictionScreen extends StatelessWidget {
             const SizedBox(height: 25),
 
             Chip(
-              backgroundColor: Colors.red.shade100,
-              avatar: const Icon(
+              backgroundColor:
+              prediction == "CKD"
+                  ? Colors.red.shade100
+                  : Colors.green.shade100,
+              avatar: Icon(
                 Icons.warning,
-                color: Colors.red,
+                color:
+                prediction == "CKD"
+                    ? Colors.red
+                    : Colors.green,
               ),
-              label: const Text(
+              label:  Text(
                 riskLevel,
                 style: TextStyle(
-                  color: Colors.red,
+                  color:
+                  prediction == "CKD"
+                        ? Colors.red
+                        : Colors.green,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -138,13 +168,13 @@ class PredictionScreen extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18),
               ),
-              child: const Padding(
-                padding: EdgeInsets.all(18),
+              child: Padding(
+                padding: const EdgeInsets.all(18),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
 
-                    Row(
+                    const Row(
                       children: [
 
                         Icon(Icons.lightbulb),
@@ -161,25 +191,29 @@ class PredictionScreen extends StatelessWidget {
                       ],
                     ),
 
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
-                    Text("• Consult a nephrologist."),
+                   Text(
+                    prediction == "CKD"
+                        ? "• Consult a nephrologist."
+                        : "• Continue regular health checkups.",
+                      ),
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
-                    Text("• Repeat ACR test within 3 months."),
+                    const Text("• Repeat ACR test within 3 months."),
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
-                    Text("• Improve blood sugar control."),
+                    const Text("• Improve blood sugar control."),
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
-                    Text("• Monitor blood pressure regularly."),
+                    const Text("• Monitor blood pressure regularly."),
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
-                    Text("• Follow diabetic kidney disease guidelines."),
+                    const Text("• Follow diabetic kidney disease guidelines."),
                   ],
                 ),
               ),

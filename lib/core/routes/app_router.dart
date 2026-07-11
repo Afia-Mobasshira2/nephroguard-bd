@@ -41,10 +41,14 @@ class AppRouter {
       ),
 
       // Prediction Result
-      GoRoute(
-        path: "/prediction",
-        builder: (context, state) => const PredictionScreen(),
-      ),
+     GoRoute(
+      path: "/prediction",
+      builder: (context, state) {
+      final result = state.extra as Map<String, dynamic>;
+
+      return PredictionScreen(result: result);
+  },
+),
 
       // History
       GoRoute(
