@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 7),
+      duration: const Duration(seconds: 10),
     );
 
     _fadeAnimation = CurvedAnimation(
@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.forward();
 
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 5), () {
       if (mounted) {
         context.go('/login');
       }
@@ -66,9 +66,9 @@ class _SplashScreenState extends State<SplashScreen>
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xff1565C0),
-              Color(0xff1E88E5),
-              Color(0xff26A69A),
+              Color.fromARGB(255, 144, 165, 189),
+              Color.fromARGB(255, 190, 220, 247),
+              Color.fromARGB(255, 139, 179, 175),
             ],
           ),
         ),

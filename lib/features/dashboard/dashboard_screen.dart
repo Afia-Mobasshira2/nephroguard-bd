@@ -195,7 +195,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   child: _ActionCard(
                     title: "History",
                     icon: Icons.history,
-                    onTap: () {},
+                    onTap: () {
+                    context.go('/history');
+                            },
                   ),
                 ),
 
@@ -205,7 +207,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   child: _ActionCard(
                     title: "Profile",
                     icon: Icons.person,
-                    onTap: () {},
+                    onTap: () {
+                    context.go('/profile');
+                    }
                   ),
                 ),
               ],

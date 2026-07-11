@@ -195,7 +195,13 @@ class PredictionScreen extends StatelessWidget {
               width: double.infinity,
               height: 55,
               child: ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                  content: Text("PDF report will be available in the final version."),
+                  ),
+                 );
+                },
 
                 icon: const Icon(Icons.download),
 
