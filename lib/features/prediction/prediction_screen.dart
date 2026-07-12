@@ -43,8 +43,21 @@ class PredictionScreen extends StatelessWidget {
 
     final double risk = probability / 100;
 
-    final String riskLevel =
-    prediction == "CKD" ? "High Risk" : "Low Risk";
+   
+   //risk depends on the confidence (%) instead of only whether the prediction is CKD.
+    String riskLevel;
+    Color riskColor;
+
+    if (probability < 40) {
+      riskLevel = "Low Risk";
+      riskColor = Colors.green;
+    } else if (probability < 70) {
+      riskLevel = "Moderate Risk";
+      riskColor = Colors.orange;
+    } else {
+      riskLevel = "High Risk";
+      riskColor = Colors.red;
+    }
 
 
 
@@ -111,10 +124,7 @@ class PredictionScreen extends StatelessWidget {
               animationDuration: 1500,
               percent: risk,
               circularStrokeCap: CircularStrokeCap.round,
-              progressColor:
-              prediction == "CKD"
-                  ? Colors.red
-                  : Colors.green,
+              progressColor: riskColor,
               backgroundColor: Colors.grey.shade300,
               center: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -137,36 +147,28 @@ class PredictionScreen extends StatelessWidget {
 
             const SizedBox(height: 25),
 
-            Chip(
-              backgroundColor:
-              prediction == "CKD"
-                  ? Colors.red.shade100
-                  : Colors.green.shade100,
+           Chip(
+              backgroundColor: riskColor.withOpacity(0.15),
+
               avatar: Icon(
-                Icons.warning,
-                color:
-                prediction == "CKD"
-                    ? Colors.red
-                    : Colors.green,
+                probability >= 70
+                    ? Icons.warning
+                    : probability >= 40
+                    ? Icons.info
+                    : Icons.check_circle,
+                color: riskColor,
               ),
-              label:  Text(
+
+              label: Text(
                 riskLevel,
-                style: TextStyle(
-                  color:
-                  prediction == "CKD"
-                        ? Colors.red
-                        : Colors.green,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(color: riskColor, fontWeight: FontWeight.bold),
               ),
             ),
 
             const SizedBox(height: 20),
 
 Card(
-  color: prediction == "CKD"
-      ? Colors.red.shade50
-      : Colors.green.shade50,
+  color: riskColor.withOpacity(0.1),
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(20),
   ),
@@ -175,15 +177,15 @@ Card(
     child: Column(
       children: [
 
-        Icon(
-          prediction == "CKD"
-              ? Icons.warning_amber_rounded
-              : Icons.check_circle,
-          size: 60,
-          color: prediction == "CKD"
-              ? Colors.red
-              : Colors.green,
-        ),
+                      Icon(
+                        probability >= 70
+                          ? Icons.warning_amber_rounded
+                          : probability >= 40
+                          ? Icons.info
+                          : Icons.check_circle,
+                      size: 60,
+                      color: riskColor,
+                    ),
 
         const SizedBox(height: 15),
 
@@ -192,9 +194,7 @@ Card(
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.bold,
-            color: prediction == "CKD"
-                ? Colors.red
-                : Colors.green,
+            color: riskColor,
           ),
         ),
 
