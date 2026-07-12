@@ -54,6 +54,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            Text('Dr.Nishita',style: TextStyle(
+                fontSize: 19,
+                fontWeight: FontWeight.bold,
+              ),),
 
             const SizedBox(height: 25),
 
