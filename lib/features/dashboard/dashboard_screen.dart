@@ -55,7 +55,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
             Text('Dr.Nishita',style: TextStyle(
-                fontSize: 19,
+                fontSize: 21,
                 fontWeight: FontWeight.bold,
               ),),
 
